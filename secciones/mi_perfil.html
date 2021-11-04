@@ -1,0 +1,559 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.css">
+    <link rel="stylesheet" href="../sn10_style.css">
+    <link rel="icon" href="./media/sn_logo_color.png">
+    <title>Senegocia</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/LICENSE.md"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/package.json"></script>
+    <script></script>
+
+
+    <script src="https://kit.fontawesome.com/926b107ace.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+            color: #333;
+        }
+        
+        .img_welcome img {
+            width: 230px;
+            margin-top: -120px;
+            padding-right: 44px;
+            margin-left: -198px;
+        }
+        
+        .card-header {
+            font-weight: bold;
+        }
+        
+        .avatar img {
+            width: 50px;
+            height: 50px;
+            border: none!important;
+            border-radius: 40px;
+        }
+        
+        .oc {
+            background-color: grey;
+            color: #fff;
+            padding-left: 2%;
+            padding-right: 2%;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        #historial_portal .card-body {
+            padding: 0%;
+        }
+        
+        #historial_portal .card-body .list-group-item {
+            padding: 2%;
+        }
+        
+        .user_name {
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            margin-bottom: 0.2rem;
+        }
+        
+        .user_name div {
+            padding-right: 0.4rem;
+        }
+        
+        .user_name span {
+            color: #797979;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding-left: 0.4rem;
+            border-left: rgb(50, 41, 173) 2px solid;
+        }
+        
+        #historial_portal {
+            height: 380px;
+            display: flex;
+        }
+        
+        #historial_portal #historial_portal_contenido {
+            overflow-x: scroll;
+        }
+        
+        #historial_portal #historial_portal_contenido ul a:hover {
+            background-color: #EAEEFB;
+            color: #333;
+            border-left: rgb(50, 41, 173) 2px solid;
+            cursor: pointer;
+        }
+        
+        #historial_portal #historial_portal_contenido ul a {
+            background-color: #ffffff;
+            color: #333;
+            border-left: #fff 1px solid;
+            transition: 0.3s;
+        }
+        
+        #fecha-card {
+            font-size: 0.8rem;
+            display: flex;
+            font-weight: 500;
+            color: rgb(129, 129, 129);
+            padding: 0%!important;
+        }
+        
+        .lista-sku li {
+            display: flex!important;
+            align-items: center;
+            justify-content: space-around;
+        }
+        
+        .bg-01 {
+            background-color: rgb(50, 41, 173);
+        }
+        
+        .bg-pend {
+            background-color: rgb(255, 99, 132);
+        }
+        
+        .cl-pend {
+            color: rgb(255, 99, 132);
+            font-weight: bold;
+        }
+        
+        .bg-rev {
+            background-color: rgb(54, 162, 235);
+        }
+        
+        .cl-rev {
+            color: rgb(54, 162, 235);
+            font-weight: bold;
+        }
+        
+        .bg-nul {
+            background-color: rgb(245, 181, 33);
+        }
+        
+        .cl-nul {
+            color: rgb(245, 181, 33);
+            font-weight: bold;
+        }
+        
+        .bg-recep {
+            background-color: rgb(99, 35, 218);
+        }
+        
+        .cl-recep {
+            color: rgb(99, 35, 218);
+            font-weight: bold;
+        }
+        
+        .bg-dte {
+            background-color: rgb(35, 218, 127);
+        }
+        
+        .cl-dte {
+            color: rgb(35, 218, 127);
+            font-weight: bold;
+        }
+        
+        .bg-lici {
+            background-color: rgb(35, 63, 218);
+        }
+        
+        .cl-lici {
+            color: rgb(35, 63, 218);
+            font-weight: bold;
+        }
+        
+        .bg-contrac {
+            background-color: rgb(149, 45, 190);
+        }
+        
+        .cl-contrac {
+            color: rgb(149, 45, 190);
+            font-weight: bold;
+        }
+        
+        .text-desc {
+            text-align: left!important;
+        }
+        
+        .bg-sn10 {
+            background-color: #fff;
+        }
+        
+        .estado-square {
+            width: 83.45px;
+            border-radius: 4px;
+            color: #fff;
+            padding-top: 0.5rem;
+        }
+        
+        .estado-square div {
+            background-color: rgba(0, 0, 0, 0.192);
+            padding-top: 0.2rem;
+            border-radius: 4px;
+            padding-bottom: 0.2rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            width: 83.45px;
+            text-align: center!important;
+        }
+        
+        .ceramico {
+            width: 315.04;
+        }
+        
+        .icon {
+            font-size: 2.2rem;
+        }
+        
+        body::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+        
+        body::-webkit-scrollbar:vertical {
+            width: 10px;
+        }
+        
+        body::-webkit-scrollbar-button:increment,
+        body::-webkit-scrollbar-button {
+            display: none;
+        }
+        
+        body::-webkit-scrollbar:horizontal {
+            height: 10px;
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background-color: #797979;
+            border-radius: 20px;
+            border: 2px solid #f1f2f3;
+        }
+        
+        body::-webkit-scrollbar-track {
+            border-radius: 10px;
+        }
+        
+        #historial_portal_contenido::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+        
+        #historial_portal_contenido::-webkit-scrollbar:vertical {
+            width: 10px;
+        }
+        
+        #historial_portal_contenido::-webkit-scrollbar-button:increment,
+        #historial_portal_contenido::-webkit-scrollbar-button {
+            display: none;
+        }
+        
+        #historial_portal_contenido::-webkit-scrollbar:horizontal {
+            height: 10px;
+        }
+        
+        #historial_portal_contenido::-webkit-scrollbar-thumb {
+            background-color: #797979;
+            border-radius: 20px;
+            border: 2px solid #f1f2f3;
+        }
+        
+        #historial_portal_contenido::-webkit-scrollbar-track {
+            border-radius: 10px;
+        }
+        
+        .card .card-header {
+            background-color: #fff;
+        }
+        
+        .img-product {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .img-product img {
+            width: 130px;
+            height: 130px;
+        }
+        
+        .product_sn10 {
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+            width: 195px;
+            height: 280px;
+            background-color: #fff;
+            color: #333;
+            display: flex!important;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 0, .7rem;
+        }
+        
+        .sku-sn10 {
+            color: #fff;
+            padding: 0.20rem;
+            border-radius: 0.4rem;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            max-width: 8rem;
+            text-align: center;
+        }
+        
+        .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            line-height: 17px;
+            padding: 0.5rem;
+        }
+        
+        .cont-sn10-lg {
+            width: 90%;
+            height: fit-content;
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 0.2rem;
+        }
+        
+        .breadcrumb {
+            font-weight: bold;
+            padding: 0.5rem;
+        }
+        
+        .btn-sn10 {
+            border: none;
+            background-color: none;
+            font-size: 14px;
+            font-weight: 600;
+            height: 34px;
+            padding-right: 4rem;
+            padding-left: 4rem;
+            border-radius: 2px;
+        }
+        
+        .bg-azul-sn10 {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        
+        .cl-azul-sn10 {
+            color: #007BFF;
+        }
+        
+        .section-filtros input {
+            height: 34px;
+            width: 34%;
+        }
+        
+        .section-filtros span {
+            font-weight: 600;
+        }
+        
+        .globo-sec {
+            width: 29px;
+            height: 29px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 100%;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin-right: 0.5rem;
+        }
+        
+        .ballon {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .ballon_off {
+            opacity: 40%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        #nav-inferior {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 1rem;
+        }
+        
+        .btn-blue-sn10 {
+            background-color: #007BFF;
+            color: #fff;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+        
+        #volver {
+            opacity: 0;
+        }
+        
+        .btn-blue-sn10:hover {
+            background-color: #006ee4;
+            color: #fff;
+        }
+        
+        #tittle-sec span {
+            font-size: 16px;
+            color: #01669A;
+            font-weight: 600;
+            padding-left: 0.5rem;
+        }
+        
+        #tittle-sec {
+            padding-top: 1rem;
+        }
+        
+        #tittle-sec i {
+            font-size: 14px;
+            color: #01669A;
+        }
+        
+        .formulario-prov {
+            padding-top: 1rem;
+        }
+        
+        .text-form {
+            font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+        }
+        
+        .text-form b {
+            font-weight: 600;
+            color: red;
+        }
+        
+        #text-area-form-sn10 label {
+            font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="d-flex flex-column">
+        <div class="container-fluid" id="sn10-back">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Inicio</li>
+                    <li class="breadcrumb-item active">Formulario ingreso proveedores</li>
+                    <li class="breadcrumb-item " aria-current="page">Mi perfil de proveedor</li>
+                </ol>
+            </nav>
+            <div class="section-title p-2">
+                <h3>Mi perfil</h3>
+            </div>
+        </div>
+
+        <div class="container-fluid d-flex flex-column align-items-lg-center">
+            <div class="d-flex flex-column" style="padding-left: 200px;padding-right: 1rem;width: 90%;">
+                <div class="d-flex flex-row align-items-center justify-content-lg-start flex-fill" id="tittle-sec">
+                    <i class="fas fa-user"></i>
+                    <span>Datos personales</span>
+                </div>
+                <form class="formulario-prov d-flex flex-fill flex-wrap">
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">Nombre de contacto<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="Jhon Doe" required>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">Nombre fantasía<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="Prueba Proveedor" required>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">Razón social<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="PRUEBA PROVEEDOR S.A" required disabled>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">RUT<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="96.556.940-5" required disabled>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">Giro<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="VENTA Y DISTRIBUCIÓN DE ARTICULOS PARA..." required>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">Actividad Económica<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="Comercializadora" required>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill">
+                        <label for="valcust01" class="text-form">Página Web<b>*</b></label>
+                        <input type="text" class="form-control" id="valcust01" value="www.provedorprueba.cl" required>
+                    </div>
+                    <div class="d-flex flex-column p-2 flex-fill" style="width: 223.95px;">
+                        <label for="valcust01" class="text-form">Foto de perfil<b>*</b></label>
+                        <input type="file" id="formFile" class="form-control " value="www.provedorprueba.cl" required>
+                    </div>
+
+                </form>
+                <div class="container-fluid" id="text-area-form-sn10">
+                    <label for="exampleFormControlTextarea1" class="form-label">Acerca de nosotros</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">Empresa líder en distribución y venta de suministros integrales para la oficina. En Prisa el cliente siempre tiene la razón. Distribución. Despacho todo Chile. Servicio al Cliente. Ejecutivos personalizados. Tipos: Suministros de Oficina, Insumos Computacionales, Muebles, Papelería.  </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg fixed-bottom" id="nav-inferior" style="padding-left: 200px;">
+        <button class="btn btn-secondary" onclick="volver_inicio()">Volver al paso anterior</button>
+        <button class="btn btn-blue-sn10" onclick="adelante()">Siguiente</button>
+    </nav>
+    <script>
+        function volver_inicio() {
+            window.top.document.getElementById("perfil_icon").style.display = "none";
+            window.top.document.getElementById("perfil_text").style.opacity = "40%";
+            window.top.document.getElementById("selec_icon").style.display = "flex";
+            window.top.document.getElementById("selec_text").style.opacity = "100%";
+            window.top.document.getElementById("divIframePrincipal").setAttribute("src", '../secciones/seleccion_categorias.html');
+        }
+
+        function adelante() {
+            window.top.document.getElementById("perfil_icon").style.display = "none";
+            window.top.document.getElementById("perfil_text").style.opacity = "40%";
+            window.top.document.getElementById("resu_icon").style.display = "flex";
+            window.top.document.getElementById("resu_text").style.opacity = "100%";
+            window.top.document.getElementById("divIframePrincipal").setAttribute("src", '../secciones/resumen.html');
+        }
+    </script>
+
+    <script src="https://kit.fontawesome.com/bd4dd1fbd8.js " crossorigin="anonymous "></script>
+    <!-- jQuery first,
+        then Popper.js,
+        then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js " integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js " integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
+    </script>
+</body>
+
+</html>
+
+</html>
+
+</html>
